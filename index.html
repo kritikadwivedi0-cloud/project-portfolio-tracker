@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ProjectForge &mdash; Developer Portfolio & Progress Tracker</title>
+  <meta name="description" content="A premium developer project portfolio and progress tracking platform with milestone charts, analytics, and interactive showcase features.">
+  
+  <!-- Premium Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- App Header -->
+  <header class="app-header">
+    <div class="logo-area">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      <span class="logo-text">Project<span class="logo-accent">Forge</span></span>
+    </div>
+
+    <nav class="nav-tabs" aria-label="Main Navigation">
+      <button class="nav-tab active" id="tab-dashboard" data-tab="dashboard">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tab-icon">
+          <rect x="3" y="3" width="7" height="9"></rect>
+          <rect x="14" y="3" width="7" height="5"></rect>
+          <rect x="14" y="12" width="7" height="9"></rect>
+          <rect x="3" y="16" width="7" height="5"></rect>
+        </svg>
+        Dashboard
+      </button>
+      <button class="nav-tab" id="tab-analytics" data-tab="analytics">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tab-icon">
+          <line x1="18" y1="20" x2="18" y2="10"></line>
+          <line x1="12" y1="20" x2="12" y2="4"></line>
+          <line x1="6" y1="20" x2="6" y2="14"></line>
+        </svg>
+        Analytics
+      </button>
+      <button class="nav-tab" id="tab-showcase" data-tab="showcase">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tab-icon">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+        </svg>
+        Showcase
+      </button>
+    </nav>
+
+    <div class="header-actions">
+      <!-- Backup Utilities -->
+      <button class="action-btn-secondary" id="btn-export" title="Export Portfolio Data to JSON">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="17 8 12 3 7 8"></polyline>
+          <line x1="12" y1="3" x2="12" y2="15"></line>
+        </svg>
+        Export
+      </button>
+      <button class="action-btn-secondary" id="btn-import-trigger" title="Import Portfolio Data from JSON">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        Import
+      </button>
+      <input type="file" id="file-import" accept=".json" class="hidden" aria-hidden="true">
+
+      <!-- Theme Switcher -->
+      <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle light/dark theme">
+        <svg id="sun-icon" class="theme-icon hidden" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg id="moon-icon" class="theme-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- App Body Layout -->
+  <div class="app-layout">
+    
+    <!-- Sidebar for quick filters & activity logs -->
+    <aside class="app-sidebar">
+      
+      <!-- Developer Profile Summary -->
+      <section class="sidebar-section profile-card">
+        <div class="profile-header">
+          <div class="avatar-glow">
+            <div class="avatar">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </div>
+          </div>
+          <div class="profile-meta">
+            <h2 class="profile-name">Developer Hub</h2>
+            <p class="profile-role">Project Portfolio</p>
+          </div>
+        </div>
+        <div class="profile-quick-stats">
+          <div class="quick-stat">
+            <span class="qs-val" id="quick-total">0</span>
+            <span class="qs-lbl">Projects</span>
+          </div>
+          <div class="quick-stat">
+            <span class="qs-val" id="quick-completed">0</span>
+            <span class="qs-lbl">Completed</span>
+          </div>
+          <div class="quick-stat font-glow">
+            <span class="qs-val" id="quick-rate">0%</span>
+            <span class="qs-lbl">Success Rate</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sidebar Section: Upcoming Deadlines -->
+      <section class="sidebar-section" id="sidebar-deadlines">
+        <h3 class="section-title">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          Alerts & Reminders
+        </h3>
+        <div class="alerts-list" id="deadlines-alerts-list">
+          <div class="empty-alerts">All clear! No upcoming deadlines within 7 days.</div>
+        </div>
+      </section>
+
+      <!-- Sidebar Section: Top Technologies Cloud -->
+      <section class="sidebar-section">
+        <h3 class="section-title">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+          Tech Distribution
+        </h3>
+        <div class="tech-cloud" id="tech-frequency-cloud">
+          <div class="empty-techs">Add technology tags in your projects to view distribution.</div>
+        </div>
+      </section>
+
+      <!-- Sidebar Section: Live Activity History -->
+      <section class="sidebar-section history-section">
+        <h3 class="section-title">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 14 14"></polyline>
+            <path d="M12 2a10 10 0 0 0-9 13.5L5 15"></path>
+          </svg>
+          Activity Stream
+        </h3>
+        <div class="activity-timeline" id="activity-timeline-feed">
+          <div class="empty-timeline">No recent activity. Start planning milestones!</div>
+        </div>
+      </section>
+
+    </aside>
+
+    <!-- Main Content Container -->
+    <main class="app-main-pane">
+
+      <!-- ==================== DASHBOARD TAB ==================== -->
+      <section id="tab-pane-dashboard" class="tab-pane">
+        
+        <!-- Controls & Filters Top-Bar -->
+        <div class="controls-bar">
+          <div class="search-box">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="search-icon">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" id="search-input" placeholder="Search projects, stacks, notes..." aria-label="Search Projects">
+          </div>
+
+          <div class="filter-dropdowns">
+            <div class="select-wrapper">
+              <select id="filter-status" aria-label="Filter by Status">
+                <option value="ALL">All Statuses</option>
+                <option value="Planning">Planning</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Testing">Testing</option>
+                <option value="Completed">Completed</option>
+              </select>
+            </div>
+
+            <div class="select-wrapper">
+              <select id="filter-tech" aria-label="Filter by Technology Stack">
+                <option value="ALL">All Technologies</option>
+              </select>
+            </div>
+
+            <div class="select-wrapper">
+              <select id="sort-select" aria-label="Sort Projects">
+                <option value="deadline-asc">Deadline (Closest First)</option>
+                <option value="deadline-desc">Deadline (Furthest First)</option>
+                <option value="progress-desc">Progress (Highest First)</option>
+                <option value="progress-asc">Progress (Lowest First)</option>
+                <option value="title-asc">Alphabetical (A - Z)</option>
+                <option value="createdAt-desc">Recently Created</option>
+              </select>
+            </div>
+          </div>
+
+          <button class="action-btn-primary" id="btn-create-project">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            Create Project
+          </button>
+        </div>
+
+        <!-- Dashboard Stats Strip -->
+        <div class="dashboard-stats-row" id="dashboard-stats-strip">
+          <!-- Populated by JavaScript securely -->
+        </div>
+
+        <!-- Grid of Projects -->
+        <div class="projects-grid" id="projects-grid-container">
+          <!-- Dynamic Project Cards Loaded Securely -->
+        </div>
+
+        <div id="dashboard-empty-state" class="empty-state hidden">
+          <div class="empty-icon">📂</div>
+          <h3 class="empty-title">No projects matching criteria</h3>
+          <p class="empty-subtitle">Try adjusting your filters or create a new developer project to begin tracking.</p>
+          <button class="action-btn-primary mt-4" id="btn-empty-create-project">Create First Project</button>
+        </div>
+      </section>
+
+      <!-- ==================== ANALYTICS TAB ==================== -->
+      <section id="tab-pane-analytics" class="tab-pane hidden">
+        <h2 class="tab-heading">Performance Insights</h2>
+        
+        <div class="analytics-metrics-grid">
+          <div class="analytic-card glow-card">
+            <div class="card-glow-bg"></div>
+            <span class="ac-lbl">Total Managed Projects</span>
+            <span class="ac-val" id="metric-total">0</span>
+            <div class="ac-sub">Total database size locally</div>
+          </div>
+          <div class="analytic-card">
+            <span class="ac-lbl">Active Deliverables</span>
+            <span class="ac-val" id="metric-active" style="color: var(--status-progress-text);">0</span>
+            <div class="ac-sub">Projects in Development or Testing</div>
+          </div>
+          <div class="analytic-card">
+            <span class="ac-lbl">Completed Portfolios</span>
+            <span class="ac-val" id="metric-completed" style="color: var(--status-completed-text);">0</span>
+            <div class="ac-sub">Completed items ready for showcase</div>
+          </div>
+          <div class="analytic-card">
+            <span class="ac-lbl">Completion Rate</span>
+            <span class="ac-val font-glow" id="metric-rate">0%</span>
+            <div class="ac-sub">Ratio of completed projects</div>
+          </div>
+        </div>
+
+        <div class="analytics-visuals-grid">
+          
+          <!-- Status Distribution Chart (Dynamic SVG Donut) -->
+          <div class="visuals-card">
+            <h3 class="vc-title">Status Breakdown</h3>
+            <div class="chart-wrapper">
+              <div class="svg-container" id="status-donut-chart-container">
+                <!-- SVG injected dynamically -->
+              </div>
+              <div class="chart-legend" id="status-donut-legend">
+                <!-- Legend list created dynamically -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Overall Completion Progress History -->
+          <div class="visuals-card">
+            <h3 class="vc-title">Milestone Completion Trends</h3>
+            <div class="chart-wrapper">
+              <div class="svg-container" id="milestones-timeline-chart-container">
+                <!-- SVG bar/line trend chart injected dynamically -->
+              </div>
+            </div>
+            <div class="chart-caption" id="trend-caption">
+              Displays total milestone metrics across active portfolio structures.
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Completion Insights AI Panel -->
+        <div class="insights-panel" id="analytics-insights-panel">
+          <!-- Dynamic intelligent comments loaded securely -->
+        </div>
+
+      </section>
+
+      <!-- ==================== SHOWCASE TAB ==================== -->
+      <section id="tab-pane-showcase" class="tab-pane hidden">
+        <div class="showcase-header">
+          <div>
+            <h2 class="tab-heading">Professional Developer Showcase</h2>
+            <p class="tab-subheading">A clean portfolio layout displaying your fully completed projects. Perfect for recruiters and clients.</p>
+          </div>
+        </div>
+
+        <div class="showcase-grid" id="showcase-grid-container">
+          <!-- Populated securely with completed projects -->
+        </div>
+
+        <div id="showcase-empty-state" class="empty-state hidden">
+          <div class="empty-icon">🏆</div>
+          <h3 class="empty-title">Showcase is empty!</h3>
+          <p class="empty-subtitle">To feature projects here, set their status to <strong>Completed</strong> and include description highlights with repository links.</p>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Footer Info -->
+  <footer class="app-footer">
+    <p>ProjectForge &bull; Secure Local-first Developer Environment &bull; Built with HTML, CSS & Vanilla JS</p>
+  </footer>
+
+  <!-- ==================== MODALS SYSTEM ==================== -->
+
+  <!-- Modal: Create / Edit Project -->
+  <div class="modal-overlay hidden" id="project-form-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title-project">
+    <div class="modal-card">
+      <header class="modal-header">
+        <h3 class="modal-title" id="modal-title-project">Add New Project</h3>
+        <button class="modal-close-btn" id="btn-close-project-modal" aria-label="Close modal">&times;</button>
+      </header>
+      
+      <form id="project-form" class="modal-body">
+        <input type="hidden" id="project-form-id">
+        
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <label for="p-title" class="form-label">Project Title *</label>
+            <input type="text" id="p-title" class="form-input" placeholder="e.g. ProjectForge Portfolio, AI Career Navigator" required maxlength="100">
+          </div>
+
+          <div class="form-group full-width">
+            <label for="p-desc" class="form-label">Short Description *</label>
+            <textarea id="p-desc" class="form-input form-textarea" placeholder="Explain the project goal in 2-3 sentences..." required maxlength="300"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="p-status" class="form-label">Development Status</label>
+            <div class="select-wrapper">
+              <select id="p-status" class="form-input">
+                <option value="Planning">Planning</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Testing">Testing</option>
+                <option value="Completed">Completed</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="p-deadline" class="form-label">Target Deadline *</label>
+            <input type="date" id="p-deadline" class="form-input" required>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="p-tech" class="form-label">Technologies (Comma-separated) *</label>
+            <input type="text" id="p-tech" class="form-input" placeholder="e.g. HTML, CSS, JavaScript, Webpack, Node.js" required>
+            <span class="form-hint">Separate stack layers with commas. Will be styled as badges.</span>
+          </div>
+
+          <div class="form-group">
+            <label for="p-github" class="form-label">GitHub Repository Link</label>
+            <input type="url" id="p-github" class="form-input" placeholder="https://github.com/username/project">
+          </div>
+
+          <div class="form-group">
+            <label for="p-live" class="form-label">Live Deployment Link</label>
+            <input type="url" id="p-live" class="form-input" placeholder="https://project-demo.vercel.app">
+          </div>
+
+          <div class="form-group full-width">
+            <label for="p-highlights" class="form-label">Showcase Highlights (Comma-separated or Semiperiods)</label>
+            <input type="text" id="p-highlights" class="form-input" placeholder="e.g. Responsive glassmorphic layout; Custom responsive charts; Clean modular state manager">
+            <span class="form-hint">Highlight key achievements for Showcase cards.</span>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="p-notes" class="form-label">Notes & Requirements Documentation</label>
+            <textarea id="p-notes" class="form-input form-textarea tall" placeholder="Store planning notes, system design layouts, feature requests, or technical challenges here..."></textarea>
+          </div>
+        </div>
+
+        <footer class="modal-footer">
+          <button type="button" class="action-btn-secondary" id="btn-cancel-project-modal">Cancel</button>
+          <button type="submit" class="action-btn-primary" id="btn-submit-project-modal">Save Project</button>
+        </footer>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Milestone Tracking & Notes Viewer -->
+  <div class="modal-overlay hidden" id="milestones-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title-milestones">
+    <div class="modal-card wide">
+      <header class="modal-header">
+        <div>
+          <h3 class="modal-title" id="modal-title-milestones">Project Details & Milestone Tracker</h3>
+          <span class="modal-subtitle" id="milestones-project-subtitle">Project Name</span>
+        </div>
+        <button class="modal-close-btn" id="btn-close-milestones-modal" aria-label="Close modal">&times;</button>
+      </header>
+
+      <div class="modal-body split-body">
+        
+        <!-- Left Pane: Notes & Details -->
+        <div class="split-pane-left">
+          <h4 class="pane-section-title">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+            Documentation & Notes
+          </h4>
+          <div class="notes-display-box" id="milestone-modal-notes-display">
+            <!-- Dynamic notes loaded securely -->
+          </div>
+          
+          <div class="highlights-section-in-modal" id="milestone-modal-highlights-box">
+            <!-- Showcase highlights display -->
+          </div>
+        </div>
+
+        <!-- Right Pane: Milestones list -->
+        <div class="split-pane-right">
+          <h4 class="pane-section-title">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 11 12 14 22 4"></polyline>
+              <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+            </svg>
+            Milestone Checklist
+          </h4>
+          
+          <div class="progress-indicator-row">
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" id="milestone-modal-progress-bar" style="width: 0%;"></div>
+            </div>
+            <span class="progress-pct-val" id="milestone-modal-progress-pct">0%</span>
+          </div>
+
+          <!-- Add milestone inline form -->
+          <form class="add-milestone-row" id="milestone-add-form">
+            <input type="text" id="milestone-input" placeholder="Create a new milestone item..." required maxlength="80" class="form-input">
+            <button type="submit" class="action-btn-primary shrink-0" title="Add Milestone">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+            </button>
+          </form>
+
+          <!-- List of Milestones -->
+          <div class="milestones-check-list" id="milestones-checklist-container">
+            <!-- Milestones loaded securely -->
+          </div>
+          
+          <div class="milestone-custom-progress-slider hidden" id="manual-progress-slider-container">
+            <label for="manual-progress-slider" class="form-label">Set Project Progress Manually</label>
+            <input type="range" id="manual-progress-slider" min="0" max="100" step="5" class="form-range">
+            <span class="form-hint">No milestones yet. Create a milestone to enable auto-calculation, or adjust slider manually.</span>
+          </div>
+
+        </div>
+
+      </div>
+
+      <footer class="modal-footer">
+        <button class="action-btn-secondary" id="btn-close-milestones-modal-bottom">Close Details</button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Modal: Delete Confirmation Modal -->
+  <div class="modal-overlay hidden" id="delete-confirm-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title-delete">
+    <div class="modal-card small alert-card">
+      <header class="modal-header alert-header">
+        <h3 class="modal-title" id="modal-title-delete">Delete Project?</h3>
+        <button class="modal-close-btn" id="btn-close-delete-modal" aria-label="Close modal">&times;</button>
+      </header>
+      <div class="modal-body">
+        <p class="delete-msg">Are you sure you want to permanently delete project <strong id="delete-project-name" class="font-glow">Project Title</strong>?</p>
+        <p class="delete-warning">This action is permanent and will delete all stored notes and milestones for this project.</p>
+      </div>
+      <footer class="modal-footer">
+        <button class="action-btn-secondary" id="btn-cancel-delete">Cancel</button>
+        <button class="action-btn-danger" id="btn-confirm-delete">Delete Permanently</button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- JS Logic Script -->
+  <script src="app.js"></script>
+</body>
+</html>
